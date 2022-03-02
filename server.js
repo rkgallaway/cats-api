@@ -51,10 +51,15 @@ async function getCats(req, res, next) {
   try {
     // maybe for your lab???  why???
     // let results = await Cat.find({email: req.query.email});
+    // 4 line sof code not necessary for assessment!!!
     let queryObject = {};
     if(req.query.location) {
       queryObject.location = req.query.location;
     }
+
+    // below for assessment!
+
+    // don't need to pass queryObject for assessment, coulld be:      let results = await Cat.find();
 
     let results = await Cat.find(queryObject);
     res.status(200).send(results);
@@ -66,7 +71,6 @@ async function getCats(req, res, next) {
 async function postCats (req, res, next) {
   console.log(req.body);
   try {
-
     let createdCat = await Cat.create(req.body);
     res.status(200).send(createdCat);
   } catch (error){
@@ -83,7 +87,7 @@ async function deleteCats (req, res, next){
     await Cat.findByIdAndDelete(id);
 
 
-    res.send('cat deleted');
+    res.status(200).send('cat deleted');
   } catch(error){
     next(error);
   }
